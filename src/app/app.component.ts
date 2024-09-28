@@ -1,43 +1,66 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AfterViewInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { SharedModule } from './shared/shared.module';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, SharedModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements AfterViewInit {
-  title = 'news';
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+  title = 'belajar_angular';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  @ViewChild('sampleDiv') elementDiv!: ElementRef<HTMLDivElement>;
 
-  async ngAfterViewInit(): Promise<void> {
+  dummyData = {
+    title: 'MyFirst Project',
+    content: 'This is my first angular application project',
+  };
+
+  internalMessage: string = 'This is my internal message app.component';
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private route: Router
+  ) {}
+
+  ngOnDestroy(): void {
+    this.dummyData = {
+      title: '',
+      content: '',
+    };
+    console.log('--- on destroy ---');
+    console.log(this.dummyData);
+  }
+  ngAfterViewInit(): void {
+    console.log('--- after view init ---');
+    console.log(this.elementDiv);
+  }
+
+  async ngOnInit(): Promise<void>  {
     if (isPlatformBrowser(this.platformId)) {
-      // Dynamically import Flowbite only when the platform is the browser
       const { initFlowbite } = await import('flowbite');
       initFlowbite();
     }
+    console.log('--- on init ---');
+    console.log(this.elementDiv);
+    console.log(this.dummyData);
+  }
+
+  receiveMessage($message: string): void {
+    this.internalMessage = $message;
+  }
+
+  navigateToPage(page: string): void {
+    this.route.navigate([page]);
   }
 }
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { initFlowbite } from 'flowbite';
-
-// @Component({
-//   selector: 'app-root',
-//   templateUrl: './app.component.html',
-//   styleUrl: './app.component.css',
-// })
-// export class AppComponent implements OnInit {
-//   title = 'belajar_angular';
-
-//   ngOnInit(): void {
-//     initFlowbite();
-//   }
-// }
