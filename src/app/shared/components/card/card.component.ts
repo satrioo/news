@@ -12,6 +12,16 @@ export class CardComponent {
   @Input()
   content: string | null = null;
 
+  @Input()
+  url: string | null = null;
+
+  @Input()
+  image: string | null = null;
+
+  @Input()
+  date: string | null = null;
+
+
   @Output()
   messageEvent = new EventEmitter<string>();
 

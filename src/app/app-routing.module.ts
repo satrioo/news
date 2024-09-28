@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'news',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),
   },
@@ -11,6 +11,15 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () =>
       import('./pages/account/account.module').then((m) => m.AccountModule),
+  },
+  {
+    path: '',
+    redirectTo: '/news', // Optional: Redirect to home on root
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: '/news', // Optional: Wildcard route
   },
 ];
 

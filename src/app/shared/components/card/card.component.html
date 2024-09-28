@@ -1,12 +1,14 @@
-<div (click)="showMessage()" class="max-w-sm p-6 bg-gray-400 border border-gray-400 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-  <a href="#">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ title }}</h5>
-  </a>
-  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ content }}</p>
-  <button (click)="sendOutputMessage()" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-      Send Message
-      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-      </svg>
-  </button>
-</div>
+
+  <div class="flex flex-row sm:block hover-img">
+    <a href="" class="thumbnail">
+      <img class="max-w-full w-full mx-auto" src="{{ image }}" alt="alt_{{title}}">
+    </a>
+    <div class="py-0 sm:py-3 pl-3 sm:pl-0">
+      <h3 class="text-lg font-bold leading-tight mb-2">
+        <a href="{{url}}" class="line-clamp-2 overflow-hidden text-ellipsis min-h-[45px]">{{ title }}</a>
+      </h3>
+      <p class=" hidden md:block text-gray-600 leading-tight mb-1 !line-clamp-3 overflow-hidden text-ellipsis">{{ content }}</p>
+      <a class="text-gray-500" href="#"><span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{date}}</a>
+    </div>
+  </div>
+
