@@ -135,7 +135,8 @@ body{
 /*hover img*/
 .hover-img:hover img {
  filter: brightness(103%) contrast(103%);
-    opacity:.99;
+    opacity:.7;
+    transition: opacity .2s;
 }
 /*splide*/
 .splide__slide img {
