@@ -11,10 +11,12 @@ import { SharedModule } from './shared/shared.module';
 import { ApiService } from './services/api.service';
 import { HeadlineModule } from './shared/components/headline/headline.module';
 import { CategoryModule } from './pages/category/category.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactModule } from './pages/contact/contact.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, HttpClientModule, HttpClientJsonpModule, HeadlineModule, CategoryModule  ],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, HttpClientModule, HttpClientJsonpModule, HeadlineModule, CategoryModule, BrowserAnimationsModule, ContactModule  ],
   providers: [provideClientHydration(), ApiService ],
   bootstrap: [AppComponent],
 })

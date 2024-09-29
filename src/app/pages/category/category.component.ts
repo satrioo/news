@@ -17,6 +17,7 @@ export class CategoryComponent implements OnInit {
   isLoading = true;
   isBrowser = false;
   error: string | null = null;
+  dummyArray: number[] = [];
 
   constructor(private apiService: ApiService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -27,7 +28,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBrowser = isPlatformBrowser(this.platformId);
-
+    this.dummyArray = Array(6).fill(0);
     if (this.isBrowser) {
       this.fetchCategory()
     } else {
@@ -50,7 +51,6 @@ export class CategoryComponent implements OnInit {
       },
       error: (err) => {
         this.error = err;
-        this.isLoading = false;
       },
     });
   }

@@ -4,16 +4,24 @@ import { HttpParams } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { map } from 'rxjs';
 
+import {
+  bounceAnimation,
+} from 'angular-animations';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  animations: [
+    bounceAnimation(),
+  ]
 })
 
 export class HomeComponent implements OnInit  {
   headline: any[] = [] as any;
   newUser = { name: 'John Doe', email: 'john@example.com' };
   isLoading = true;
+  isHeadlineLoading = true;
   isPartialLoading = false;
   error: string | null = null;
   articles: any[] = [];
@@ -22,15 +30,19 @@ export class HomeComponent implements OnInit  {
   currentPage = 0;  // Track the current page
   isBrowser = false;
   totalArticle = 0;
+  bounce: any;
+  dummyArray: number[] = [];
+  dummyHeadline: number[] = [];
 
   constructor(private apiService: ApiService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     this.isBrowser = isPlatformBrowser(this.platformId);
-
+    this.dummyArray = Array(6).fill(0);
+    this.dummyHeadline = Array(4).fill(0);
     if (this.isBrowser) {
       this.fetchNewsAsync();
-      this.fetchHeadline()
+      this.fetchHeadline();
     } else {
       this.isLoading = false;
     }
@@ -51,14 +63,16 @@ export class HomeComponent implements OnInit  {
         this.articles = data.articles;
         this.totalArticle = data.articles.length;
         this.loadArticlesInChunks(); // Load the initial chunk of articles
+        this.isLoading = false;
       } else {
         this.error = 'No articles available';
       }
     } catch (err) {
       this.error = 'Failed to fetch articles';
-    } finally {
-      this.isLoading = false;
     }
+    // finally {
+    //   this.isLoading = false;
+    // }
   }
 
   loadArticlesInChunks() {
@@ -72,11 +86,13 @@ export class HomeComponent implements OnInit  {
 
     this.currentPage++; // Increment page count
     this.isPartialLoading = false; // Hide the partial loader once the chunk is loaded
+    this.animate()
   }
 
   loadMoreArticles() {
     if (!this.isPartialLoading && this.displayedArticles.length < this.articles.length) {
       this.loadArticlesInChunks(); // Load the next chunk of articles
+      this.animate()
     }
   }
 
@@ -91,12 +107,20 @@ export class HomeComponent implements OnInit  {
     ).subscribe({
       next: (data) => {
         this.headline = data;  // Assign the `docs` to `users`
-        this.isLoading = false;
+        this.isHeadlineLoading = false;
       },
       error: (err) => {
         this.error = err;
-        this.isLoading = false;
+        this.isHeadlineLoading = false;
       },
     });
+  }
+
+  animationState = false;
+  animate() {
+    this.animationState = false;
+    setTimeout(() => {
+      this.animationState = true;
+    }, 1);
   }
 }

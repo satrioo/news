@@ -21,6 +21,9 @@ export class CardComponent {
   @Input()
   author: string | null = null;
 
+  @Input()
+  loading: Boolean | null = null;
+
 
   @Output()
   messageEvent = new EventEmitter<string>();

@@ -1,25 +1,30 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-
-  Inject,
-
-  PLATFORM_ID,
-
-} from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss'] // Fixed typo here
 })
 export class HeaderComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private route: Router
+    private router: Router, // Renamed from 'route' to 'router'
+    private activatedRoute: ActivatedRoute // Added ActivatedRoute
   ) {}
+  currentPath = ''
+
+  ngOnInit() {
+    // Get the current full route path
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentPath = event.urlAfterRedirects;
+      });
+  }
 
   navigateToPage(page: string): void {
-    this.route.navigate([page]);
+    this.router.navigate([page]);
   }
 }

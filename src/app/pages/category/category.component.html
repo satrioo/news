@@ -1,44 +1,59 @@
 <div class="xl:container mx-auto px-3 sm:px-4 xl:px-2">
   <div class="flex flex-row flex-wrap">
     <!-- Left -->
-    <div class="flex-shrink max-w-full w-full lg:w-2/3  overflow-hidden">
+    <div class="flex-shrink max-w-full w-full lg:w-2/3 overflow-hidden">
       <div class="w-full py-3">
         <h2 class="text-gray-800 text-2xl font-bold">
-          <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span> {{ selectedCategory }}
+          <span class="inline-block h-5 border-l-3 border-red-600 mr-2"></span>
+          {{ selectedCategory }}
         </h2>
       </div>
-      <div class="flex flex-row flex-wrap -mx-3">
-
-        <app-card class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
-        *ngFor="let article of articles.slice(0, 6)"
-         [title]="article.title"
-         [content]="article.content"
-         [url]="article.url"
-         [image]="article.urlToImage"
-         [author]="article.author"
+      <div *ngIf="isLoading" class="flex flex-row flex-wrap -mx-3">
+        <app-card
+          *ngFor="let item of dummyArray"
+          class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
+          [loading]="isLoading"
         />
+      </div>
 
-
+      <div *ngIf="!isLoading" class="flex flex-row flex-wrap -mx-3">
+        <app-card
+          *ngFor="let article of articles.slice(0, 6)"
+          class="flex-shrink max-w-full w-full sm:w-1/3 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
+          [title]="article.title"
+          [content]="article.content"
+          [url]="article.url"
+          [image]="article.urlToImage"
+          [author]="article.author"
+          [loading]="isLoading"
+        />
       </div>
     </div>
+
     <!-- right -->
-    <div class="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last" style="position: relative;">
+    <div
+      class="flex-shrink max-w-full w-full lg:w-1/3 lg:pl-8 lg:pt-14 lg:pb-8 order-first lg:order-last"
+      style="position: relative"
+    >
       <div class="w-full bg-white">
         <div class="mb-6">
           <div class="p-4 bg-gray-100">
             <h2 class="text-lg font-bold">Choose by Category</h2>
           </div>
           <ul class="post-number">
-            <li class=" cursor-pointer border-b border-gray-100 hover:bg-gray-50"
-            *ngFor="let item of category"
-            (click)="selectCategory(item)">
-              <a class="text-lg font-bold px-6 py-3 flex flex-row items-center">{{ item }}</a>
+            <li
+              class="cursor-pointer border-b border-gray-100 hover:bg-gray-50"
+              *ngFor="let item of category"
+              (click)="selectCategory(item)"
+            >
+              <a
+                class="text-lg font-bold px-6 py-3 flex flex-row items-center"
+                >{{ item }}</a
+              >
             </li>
           </ul>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>

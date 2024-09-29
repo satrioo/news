@@ -8,14 +8,14 @@ const routes: Routes = [
       import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'account',
-    loadChildren: () =>
-      import('./pages/account/account.module').then((m) => m.AccountModule),
-  },
-  {
     path: 'category',
     loadChildren: () =>
       import('./pages/category/category.module').then((m) => m.CategoryModule),
+  },
+  {
+    path: 'contact',
+    loadChildren: () =>
+      import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
   {
     path: '',
