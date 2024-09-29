@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  title = 'belajar_angular';
+  title = 'news';
 
   @ViewChild('sampleDiv') elementDiv!: ElementRef<HTMLDivElement>;
 
