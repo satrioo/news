@@ -40,19 +40,14 @@ export class HomeComponent implements OnInit  {
     this.isBrowser = isPlatformBrowser(this.platformId);
     this.dummyArray = Array(6).fill(0);
     this.dummyHeadline = Array(4).fill(0);
-    if (this.isBrowser) {
       this.fetchNewsAsync();
       this.fetchHeadline();
-    } else {
-      this.isLoading = false;
-    }
   }
 
-  // Fetch news asynchronously
   async fetchNewsAsync() {
-    const apiUrl = 'https://newsapi.org/v2/everything';
+    const apiUrl = 'everything';
     const params = new HttpParams()
-    .set('apiKey', '6d203f0cddc542e0a9e0c47de325158c')
+    .set('apiKey', 'f115b1bc9dde45b0b4a8a2fddee5d113')
     .set('q', 'news')
 
     try {
@@ -70,13 +65,10 @@ export class HomeComponent implements OnInit  {
     } catch (err) {
       this.error = 'Failed to fetch articles';
     }
-    // finally {
-    //   this.isLoading = false;
-    // }
   }
 
   loadArticlesInChunks() {
-    this.isPartialLoading = true; // Show partial loading spinner
+    this.isPartialLoading = true;
 
     const nextPageStartIndex = this.currentPage * this.pageSize;
     const nextPageEndIndex = nextPageStartIndex + this.pageSize;
@@ -84,29 +76,29 @@ export class HomeComponent implements OnInit  {
     const nextChunk = this.articles.slice(nextPageStartIndex, nextPageEndIndex);
     this.displayedArticles = [...this.displayedArticles, ...nextChunk];
 
-    this.currentPage++; // Increment page count
-    this.isPartialLoading = false; // Hide the partial loader once the chunk is loaded
+    this.currentPage++;
+    this.isPartialLoading = false;
     this.animate()
   }
 
   loadMoreArticles() {
     if (!this.isPartialLoading && this.displayedArticles.length < this.articles.length) {
-      this.loadArticlesInChunks(); // Load the next chunk of articles
+      this.loadArticlesInChunks();
       this.animate()
     }
   }
 
   fetchHeadline() {
-    const apiUrl = 'https://newsapi.org/v2/top-headlines';  // Replace with your actual API URL
+    const apiUrl = 'top-headlines';
     let params = new HttpParams()
-    .set('apiKey', '6d203f0cddc542e0a9e0c47de325158c')
+    .set('apiKey', 'f115b1bc9dde45b0b4a8a2fddee5d113')
     .set('sources', 'bbc-news')
 
     this.apiService.get<any>(apiUrl, params).pipe(
       map(response => response.articles)
     ).subscribe({
       next: (data) => {
-        this.headline = data;  // Assign the `docs` to `users`
+        this.headline = data;
         this.isHeadlineLoading = false;
       },
       error: (err) => {

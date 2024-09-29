@@ -37,9 +37,9 @@ export class CategoryComponent implements OnInit {
   }
 
   fetchCategory() {
-    const apiUrl = 'https://newsapi.org/v2/everything';  // Replace with your actual API URL
+    const apiUrl = 'everything';
     let params = new HttpParams()
-    .set('apiKey', '6d203f0cddc542e0a9e0c47de325158c')
+    .set('apiKey', 'f115b1bc9dde45b0b4a8a2fddee5d113')
     .set('q', this.selectedCategory)
 
     this.apiService.get<any>(apiUrl, params).pipe(

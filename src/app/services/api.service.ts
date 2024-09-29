@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   get<T>(apiUrl: string, params?: HttpParams): Observable<T> {
-    return this.http.get<T>(apiUrl, { params }).pipe(
+    return this.http.get<T>('https://newsapi.org/v2/'+apiUrl, { params }).pipe(
       // retry(2),
       timeout(100000),
       catchError(this.handleError)

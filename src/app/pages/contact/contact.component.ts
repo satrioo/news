@@ -23,7 +23,7 @@ export class ContactComponent {
   }
 
   sendEmail() {
-    const mailtoLink = `mailto:${this.recipient}?subject=${encodeURIComponent(this.subject+'&nbsp'+'from'+this.firstName+'-'+this.lastName)}&body=${encodeURIComponent(this.body)}`;
+    const mailtoLink = `mailto:${this.recipient}?subject=${encodeURIComponent(this.subject+'   '+'from: '+this.firstName+'-'+this.lastName)}&body=${encodeURIComponent(this.body)}`;
     window.location.href = mailtoLink;
   }
 }
