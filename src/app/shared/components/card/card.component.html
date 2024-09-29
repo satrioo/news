@@ -14,18 +14,18 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<div *ngIf="!loading" class=" relative article flex flex-row sm:block hover-img">
+<div *ngIf="!loading" class=" relative article flex flex-row sm:block hover-img overflow-hidden">
     <figure class="snip1577 thumbnail">
       <img class="max-w-full w-full mx-auto" src="{{ image || 'assets/no-image.png' }}" alt="alt_{{title || '-'}}">
       <figcaption>
         <h3>Open Article</h3>
       </figcaption>
-      <a href="#"></a>
     </figure>
 
     <div class="py-0 px-2 mx-auto sm:py-3 ">
+      <a href="{{url || '-'}}" class="link"></a>
       <h3 class="text-lg font-bold leading-tight mb-2">
-        <a href="{{url || '-'}}" class=" link line-clamp-2 overflow-hidden text-ellipsis min-h-[45px]">{{ title || '-'}}</a>
+        <a href="#" class="  line-clamp-2 overflow-hidden text-ellipsis min-h-[45px]">{{ title || '-'}}</a>
       </h3>
       <p class=" hidden md:block text-gray-600 leading-tight mb-1 !line-clamp-3 overflow-hidden text-ellipsis">{{ content || '-'}}</p>
       <a class="text-gray-500" href="#"><span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{ author || 'Anonymous' }} </a>

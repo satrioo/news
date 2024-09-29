@@ -39,7 +39,7 @@ export class CategoryComponent implements OnInit {
   fetchCategory() {
     const apiUrl = 'everything';
     let params = new HttpParams()
-    .set('apiKey', 'f115b1bc9dde45b0b4a8a2fddee5d113')
+    .set('apiKey', 'b98a6a5e68f2470386d3dc7ca9140b33')
     .set('q', this.selectedCategory)
 
     this.apiService.get<any>(apiUrl, params).pipe(
