@@ -1,14 +1,14 @@
 
   <div class="flex flex-row sm:block hover-img">
     <a href="" class="thumbnail">
-      <img class="max-w-full w-full mx-auto" src="{{ image }}" alt="alt_{{title}}">
+      <img class="max-w-full w-full mx-auto" src="{{ image || 'assets/no-image.png' }}" alt="alt_{{title}}">
     </a>
     <div class="py-0 sm:py-3 pl-3 sm:pl-0">
       <h3 class="text-lg font-bold leading-tight mb-2">
         <a href="{{url}}" class="line-clamp-2 overflow-hidden text-ellipsis min-h-[45px]">{{ title }}</a>
       </h3>
       <p class=" hidden md:block text-gray-600 leading-tight mb-1 !line-clamp-3 overflow-hidden text-ellipsis">{{ content }}</p>
-      <a class="text-gray-500" href="#"><span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{date}}</a>
+      <a class="text-gray-500" href="#"><span class="inline-block h-3 border-l-2 border-red-600 mr-2"></span>{{ author || 'Anonymous' }} </a>
     </div>
   </div>
 

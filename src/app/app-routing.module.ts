@@ -13,6 +13,11 @@ const routes: Routes = [
       import('./pages/account/account.module').then((m) => m.AccountModule),
   },
   {
+    path: 'category',
+    loadChildren: () =>
+      import('./pages/category/category.module').then((m) => m.CategoryModule),
+  },
+  {
     path: '',
     redirectTo: '/news', // Optional: Redirect to home on root
     pathMatch: 'full',

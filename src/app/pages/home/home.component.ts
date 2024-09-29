@@ -11,7 +11,7 @@ import { map } from 'rxjs';
 })
 
 export class HomeComponent implements OnInit  {
-  users: any[] = [] as any;
+  headline: any[] = [] as any;
   newUser = { name: 'John Doe', email: 'john@example.com' };
   isLoading = true;
   isPartialLoading = false;
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit  {
 
     if (this.isBrowser) {
       this.fetchNewsAsync();
+      this.fetchHeadline()
     } else {
       this.isLoading = false;
     }
@@ -79,17 +80,17 @@ export class HomeComponent implements OnInit  {
     }
   }
 
-  fetchUsers() {
-    const apiUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';  // Replace with your actual API URL
+  fetchHeadline() {
+    const apiUrl = 'https://newsapi.org/v2/top-headlines';  // Replace with your actual API URL
     let params = new HttpParams()
-    .set('api-key', 'lQpWZrjBfeoqsoWzPdosduHzmYzQxB0S')
-    .set('q', 'food')
+    .set('apiKey', '6d203f0cddc542e0a9e0c47de325158c')
+    .set('sources', 'bbc-news')
 
     this.apiService.get<any>(apiUrl, params).pipe(
-      map(response => response.response.docs)
+      map(response => response.articles)
     ).subscribe({
       next: (data) => {
-        this.users = data;  // Assign the `docs` to `users`
+        this.headline = data;  // Assign the `docs` to `users`
         this.isLoading = false;
       },
       error: (err) => {

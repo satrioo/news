@@ -19,7 +19,7 @@ export class CardComponent {
   image: string | null = null;
 
   @Input()
-  date: string | null = null;
+  author: string | null = null;
 
 
   @Output()
